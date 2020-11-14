@@ -1,0 +1,1 @@
+window.AdminProConfig = @json($config)

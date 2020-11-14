@@ -1,0 +1,59 @@
+{
+    "name": "smallruraldog/admin-dog",
+    "description": "My awesome package",
+    "keywords": [
+        "Laravel",
+        "Admin",
+        "Vue"
+    ],
+    "homepage": "https://github.com/smallruraldog/admin-dog",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "SmallRuralDog",
+            "email": "thinktb@qq.com",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/smallruraldog/admin-dog/issues",
+        "source": "https://github.com/smallruraldog/admin-dog"
+    },
+    "require": {
+        "php": "^7.0",
+        "illuminate/support": "^5.8|^6.0|^7.0|^8.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "3.8.*",
+        "phpunit/phpunit": "^7.0|^8.0|^9.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "SmallRuralDog\\AdminDog\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "SmallRuralDog\\AdminDog\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "SmallRuralDog\\AdminDog\\AdminDogServiceProvider"
+            ],
+            "aliases": {
+                "AdminDog": "SmallRuralDog\\AdminDog\\AdminDogFacade"
+            }
+        }
+    }
+}
