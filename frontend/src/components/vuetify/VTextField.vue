@@ -3,8 +3,16 @@
 </template>
 
 <script>
+import {BaseComponent} from "@/components/mixins";
+
 export default {
-    props: ['attrs']
+    props: ['attrs'],
+    mixins: [BaseComponent],
+    data(){
+        return{
+            nnnn:'123456'
+        }
+    }
 }
 </script>
 

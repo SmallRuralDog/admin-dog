@@ -11,8 +11,8 @@ return [
     'logo' => '',
     'route' => [
         'domain' => null,
-        'prefix' => env('ADMIN_PRO_ROUTE_PREFIX', 'admin-dog'),
-        'api_prefix' => env('ADMIN_PRO_API_ROUTE_PREFIX', 'api-admin-dog'),
-        'middleware' => ['web','AdminDog'],
+        'prefix' => env('ADMIN_DOG_ROUTE_PREFIX', 'admin-dog'),
+        'api_prefix' => env('ADMIN_DOG_API_ROUTE_PREFIX', 'api-admin-dog'),
+        'middleware' => ['web','adminDog'],
     ]
 ];

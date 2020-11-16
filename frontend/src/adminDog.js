@@ -9,9 +9,17 @@ import "./plugins/base";
 import VueSkyCons from "vue-skycons";
 import VueFeather from "vue-feather";
 import InstantSearch from "vue-instantsearch";
+import VueBus from 'vue-bus';
+import lodash from 'lodash'
 
 Vue.prototype.$http = axios;
 Vue.prototype.axios = axios;
+
+Vue.prototype._ = lodash;
+window._ = lodash;
+
+
+Vue.use(VueBus);
 
 Vue.use(VueFeather);
 Vue.use(VueSkyCons, {

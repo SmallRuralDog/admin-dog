@@ -22,7 +22,7 @@ const router = new Router({
     // This is for the scroll top when click on any router link
     routes: [
         {
-            path: "/",
+            path: "/main",
             component: () => import('@/layouts/full-layout/Layout'),
             children: [
                 {

@@ -15,14 +15,13 @@
 </template>
 
 <script>
+
+import {BaseComponent} from "@/components/mixins";
+
 export default {
     props: ['attrs'],
-    methods: {
-        onClick() {
-            let _this = this;
-            this.attrs.events && this.attrs.events.click && new Function('_this',this.attrs.events.click)(_this)
-        }
-    }
+    mixins: [BaseComponent],
+    methods: {}
 }
 </script>
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace SmallRuralDog\AdminDog\Components\Common;
+namespace SmallRuralDog\AdminDog\Components\Custom;
 
 use SmallRuralDog\AdminDog\Components\BaseComponent;
 

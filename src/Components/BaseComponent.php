@@ -4,6 +4,7 @@ namespace SmallRuralDog\AdminDog\Components;
 
 use Closure;
 use SmallRuralDog\AdminDog\AdminJsonBuilder;
+use SmallRuralDog\AdminDog\Events\EventListener;
 
 /**
  * Class BaseComponent
@@ -14,6 +15,7 @@ class BaseComponent extends AdminJsonBuilder
     protected $componentName = "";
 
     /**
+     * Sets the name of the render component
      * @param string $componentName
      * @return $this
      */
@@ -24,6 +26,7 @@ class BaseComponent extends AdminJsonBuilder
     }
 
     /**
+     * Add component slots or child elements
      * @param BaseComponent|Closure|string $slot
      * @param string $name
      * @return $this
@@ -47,21 +50,58 @@ class BaseComponent extends AdminJsonBuilder
         return $this;
     }
 
+    /**
+     * Set component class
+     * @param $class
+     * @return $this
+     */
     public function class($class)
     {
         $this->class = $class;
         return $this;
     }
 
+    /**
+     * Set component style
+     * @param $style
+     * @return $this
+     */
     public function style($style)
     {
         $this->style = $style;
         return $this;
     }
 
-    public function prop($name, $value=true)
+    /**
+     * Set component props
+     * @param $name
+     * @param bool $value
+     * @return $this
+     */
+    public function prop($name, $value = true)
     {
         $this->props[$name] = $value;
+        return $this;
+    }
+
+    /**
+     * Set component listening
+     * @param EventListener|Closure $listener
+     * @return $this
+     */
+    public function addEventListener($listener)
+    {
+        if ($listener instanceof Closure) {
+
+            $eventListener = EventListener::make();
+
+            call_user_func($listener, $eventListener);
+
+            $this->listener[] = $eventListener;
+        } else {
+            $this->listener[] = $listener;
+        }
+
         return $this;
     }
 
