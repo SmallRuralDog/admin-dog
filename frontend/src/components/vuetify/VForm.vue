@@ -7,6 +7,7 @@
                 :style="slot.style"
                 :is="slot.componentName"
                 :attrs="slot"
+                :fields="fields"
             />
         </template>
     </v-form>
@@ -18,14 +19,25 @@ import {BaseComponent} from "@/components/mixins";
 export default {
     props: ['attrs'],
     mixins: [BaseComponent],
+    data() {
+        return {
+            fields: {}
+        }
+    },
+    created() {
+        this.fields = this.attrs.fields
+    },
     methods: {
         submit() {
             this.$refs.form.validate();
             if (this.$refs.form.validate(true)) {
-                this.$refs.form.inputs.map(input => {
-                    console.log(input.lazyValue)
-                    console.log(input)
-                })
+
+                //if set action
+                if (this.attrs.action) {
+                    this.$http['post'](this.attrs.action,this.fields)
+                }
+
+
             }
         },
         //Resets the state of all registered inputs (inside the form) to {} for arrays and null for all other values. Resets errors bag when using the lazy-validation prop.

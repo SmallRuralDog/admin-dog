@@ -21,15 +21,18 @@
                 :class="slot.class"
                 :style="slot.style"
                 :is="slot.componentName"
-                v-bind="slot.props"
                 :attrs="slot"
+                v-bind="$attrs"
             />
         </template>
     </component>
 </template>
 
 <script>
+import {BaseComponent} from "@/components/mixins";
+
 export default {
-    props: ['attrs']
+    props: ['attrs'],
+    mixins: [BaseComponent]
 }
 </script>

@@ -14,5 +14,6 @@ return [
         'prefix' => env('ADMIN_DOG_ROUTE_PREFIX', 'admin-dog'),
         'api_prefix' => env('ADMIN_DOG_API_ROUTE_PREFIX', 'api-admin-dog'),
         'middleware' => ['web','adminDog'],
+        'api_middleware' => ['api','adminDog'],
     ]
 ];

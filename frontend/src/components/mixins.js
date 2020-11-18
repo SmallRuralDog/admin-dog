@@ -1,4 +1,9 @@
 const BaseComponent = {
+    data() {
+        return {
+            vif: true,//组件v-if
+        }
+    },
     mounted() {
         /**
          * 注册组件监听事件
@@ -43,6 +48,22 @@ const BaseComponent = {
                  */
                 this.attrs.events.click.jsCode && new Function('_this', this.attrs.events.click.jsCode)(this)
 
+            }
+        },
+        baseChange() {
+            if (this.attrs.events && this.attrs.events.change) {
+                /**
+                 * 如果是触发事件
+                 * If it's a triggering event
+                 */
+                this.attrs.events.change.emits && this.attrs.events.change.emits.length > 0 && this.attrs.events.change.emits.map(emit => {
+                    this.$bus.emit(emit, this);
+                });
+                /**
+                 * 如果是执行代码
+                 * If you're executing code
+                 */
+                this.attrs.events.change.jsCode && new Function('_this', this.attrs.events.change.jsCode)(this)
             }
         }
     },

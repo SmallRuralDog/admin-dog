@@ -1,16 +1,26 @@
 <template>
-    <v-text-field v-bind="attrs.props"></v-text-field>
+    <v-text-field v-bind="attrs.props" :value="value" @change="onChange"></v-text-field>
 </template>
 
 <script>
 import {BaseComponent} from "@/components/mixins";
 
 export default {
-    props: ['attrs'],
+    props: ['attrs', 'fields'],
     mixins: [BaseComponent],
-    data(){
-        return{
-            nnnn:'123456'
+    data() {
+        return {
+            value: null
+        }
+    },
+    mounted() {
+        this.value = this._.cloneDeep(this.fields[this.attrs.vModel])
+    },
+    methods: {
+        onChange(e) {
+            this.value = e;
+            this.attrs.vModel && (this.fields[this.attrs.vModel] = e);
+            this.baseChange()
         }
     }
 }

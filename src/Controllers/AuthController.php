@@ -16,6 +16,7 @@ use SmallRuralDog\AdminDog\Components\VGrid\VContainer;
 use SmallRuralDog\AdminDog\Components\VGrid\VRow;
 use SmallRuralDog\AdminDog\Components\VIcon\VIcon;
 use SmallRuralDog\AdminDog\Components\VTextField\VTextField;
+use SmallRuralDog\AdminDog\Events\ChangeEvent;
 use SmallRuralDog\AdminDog\Events\ClickEvent;
 use SmallRuralDog\AdminDog\Events\EventListener;
 
@@ -67,6 +68,8 @@ JS;
                                         )
                                         ->slot(
                                             VForm::make()
+                                                ->fields(['username' => '296404875@qq.com', 'password' => '123456', 'remember' => false])
+                                                ->action(route('admin-dog.login-post'))
                                                 ->addEventListener(function (EventListener $eventListener) {
                                                     $eventListener->listener("submit");
                                                     $js = <<<JS
@@ -78,6 +81,7 @@ JS;
                                                 ->prop('lazy-validation')
                                                 ->slot(function () {
                                                     return VTextField::make()
+                                                        ->vModel('username')
                                                         ->class('mt-4')
                                                         ->rule("!!v || 'Name is required'")
                                                         ->rule('/.+@.+\..+/.test(v) || "E-mail must be valid"')
@@ -86,6 +90,7 @@ JS;
                                                         ->prop('outlined');
                                                 })->slot(function () {
                                                     return VTextField::make()
+                                                        ->vModel('password')
                                                         ->rules(['!!v || "Password is required"', '(v && v.length <= 10) || "Password must be less than 10 characters"'])
                                                         ->prop('label', 'Password')
                                                         ->prop('required')
@@ -98,13 +103,16 @@ JS;
                                                     return Element::make('div')
                                                         ->class('d-block d-sm-flex align-center mb-4 mb-sm-0')
                                                         ->slot(function () {
-                                                            return VCheckbox::make()->prop('label', 'Remember me?')->prop('required');
+                                                            return VCheckbox::make()->vModel('remember')->prop('label', 'Remember me?')->prop('required')->onChange(function (ChangeEvent $changeEvent) {
+
+                                                                $changeEvent->emit('xxx');
+                                                            });
                                                         })
                                                         ->slot(Element::make('div')
                                                             ->class('ml-auto')
                                                             ->slot('<a href="javascript:void(0)" class="link">Forgot pwd?</a>')
                                                         );
-                                                })->slot(VBtn::make()->slot("Sign In")->class('mr-4')->prop('submit')->prop('block')->prop('color', 'info')->onClick(function (ClickEvent $clickEvent) {
+                                                })->slot(VBtn::make()->slot("Sign In")->class('mr-4')->prop('block')->prop('color', 'info')->onClick(function (ClickEvent $clickEvent) {
                                                     $clickEvent->emit('submit');
                                                 }))
                                         )->slot(function () {
@@ -122,6 +130,12 @@ JS;
 
 
         return $container;
+    }
+
+
+    public function loginPost()
+    {
+        return $this->fullPath('/main/index');
     }
 
 }

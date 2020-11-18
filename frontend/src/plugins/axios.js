@@ -5,6 +5,9 @@ import router from "../router";
 axios.interceptors.request.use(
     config => {
         config.headers["X-Requested-With"] = "XMLHttpRequest";
+
+        config.headers["X-CSRF-TOKEN"] = window.AdminDogConfig.csrfToken;
+
         return config;
     },
     error => {
@@ -19,15 +22,10 @@ axios.interceptors.response.use(
 
                 break;
             case 301:
-                try {
-                    if (data.data.isVueRoute) {
-                        router.replace(data.data.url);
-                    } else {
-                        window.location.href = data.data.url;
-                    }
-                } catch (error) {
-                    console.error("请返回 Admin::responseRedirect()");
-                }
+                window.location.href = data.data;
+                break;
+            case 302:
+                router.replace(data.data);
                 break;
             case 200:
 

@@ -24,7 +24,7 @@ export default {
     },
     methods: {
         getView() {
-            let viewUrl = window.AdminProConfig.apiRoot + this.$route.fullPath;
+            let viewUrl = window.AdminDogConfig.apiRoot + this.$route.fullPath;
             console.log(viewUrl)
             this.$http.get(viewUrl, {
                 params: this.params

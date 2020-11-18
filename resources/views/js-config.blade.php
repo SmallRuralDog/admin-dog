@@ -1,1 +1,1 @@
-window.AdminProConfig = @json($config)
+window.AdminDogConfig = @json($config)
