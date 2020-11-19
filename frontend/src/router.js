@@ -5,7 +5,7 @@ import goTo from "vuetify/es5/services/goto";
 Vue.use(Router);
 
 const router = new Router({
-    mode: "history",
+    //mode: "history",
     base: process.env.BASE_URL,
     // This is for the scroll top when click on any router link
     scrollBehavior: (to, from, savedPosition) => {
@@ -21,6 +21,10 @@ const router = new Router({
     },
     // This is for the scroll top when click on any router link
     routes: [
+        {
+            path: '/',
+            redirect: '/auth/login'
+        },
         {
             path: "/main",
             component: () => import('@/layouts/full-layout/Layout'),

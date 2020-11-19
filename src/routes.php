@@ -10,6 +10,7 @@ Route::group([
 ], function (Router $router) {
 
     $router->get('/', RootController::class . "@index")->name('admin-dog.root');
+    $router->get('/{path}', RootController::class . "@index")->name('admin-dog.root')->where('path','.*');
 
     $router->get('home', \App\AdminDog\Controllers\HomeController::class . '@index')->name('admin-dog.home');
 

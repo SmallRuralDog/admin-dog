@@ -9,6 +9,7 @@
 </template>
 
 <script>
+import NProgress from "nprogress";
 export default {
     name: "Base",
     data() {
@@ -25,13 +26,14 @@ export default {
     methods: {
         getView() {
             let viewUrl = window.AdminDogConfig.apiRoot + this.$route.fullPath;
-            console.log(viewUrl)
+            NProgress.start(800);
             this.$http.get(viewUrl, {
                 params: this.params
             }).then(data => {
                 this.componentData = data;
+                NProgress.done();
             }).catch(() => {
-
+                NProgress.done();
             });
         }
     }

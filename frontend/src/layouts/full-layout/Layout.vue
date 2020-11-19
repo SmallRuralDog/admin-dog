@@ -12,11 +12,11 @@
           enter-active-class="fade-enter-active fade-enter"
           leave-active-class="fade-leave-active fade-enter"
         >
-          <router-view></router-view>
+          <router-view :key="$route.fullPath"></router-view>
         </transition>
         <v-btn
           bottom
-          color="success"
+          color="primary"
           dark
           fab
           fixed
