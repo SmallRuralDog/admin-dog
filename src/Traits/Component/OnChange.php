@@ -9,17 +9,18 @@ use SmallRuralDog\AdminDog\Events\ClickEvent;
 trait OnChange
 {
     /**
+     * onChange事件
      * Component change event
-     * @param Closure $change
+     * @param Closure $closure
      * @return $this
      */
-    public function onChange(Closure $change)
+    public function onChange(Closure $closure)
     {
-        $changeEvent = ChangeEvent::make();
+        $event = ChangeEvent::make();
 
-        call_user_func($change, $changeEvent);
+        call_user_func($closure, $event);
 
-        $this->events['change'] = $changeEvent;
+        $this->events['change'] = $event;
         return $this;
     }
 }

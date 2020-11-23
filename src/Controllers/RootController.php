@@ -20,7 +20,7 @@ class RootController extends Controller
 
         $config = [
             'logo' => config('admin-dog.logo'),
-            'apiRoot' => url(config('admin-dog.route.api_prefix')),
+            'apiRoot' => config('admin-dog.route.api_prefix'),
             'csrfToken'=>csrf_token(),
         ];
         return response(

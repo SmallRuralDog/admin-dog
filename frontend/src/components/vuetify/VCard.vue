@@ -7,6 +7,7 @@
                 :style="slot.style"
                 :is="slot.componentName"
                 :attrs="slot"
+                v-bind="$attrs"
             />
         </template>
     </v-card>

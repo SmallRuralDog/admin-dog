@@ -2,6 +2,7 @@
 
 namespace SmallRuralDog\AdminDog;
 
+use Illuminate\Support\Arr;
 use Illuminate\Support\ServiceProvider;
 
 class AdminDogServiceProvider extends ServiceProvider
@@ -9,6 +10,7 @@ class AdminDogServiceProvider extends ServiceProvider
 
     protected $routeMiddleware = [
         'adminDog.bootstrap' => Middleware\Bootstrap::class,
+        'adminDog.auth' => Middleware\Authenticate::class,
     ];
 
     /**
@@ -78,9 +80,16 @@ class AdminDogServiceProvider extends ServiceProvider
             return new AdminDog;
         });
 
+        $this->loadAdminDogAuthConfig();
+
         $this->registerRouteMiddleware();
     }
 
+
+    protected function loadAdminDogAuthConfig()
+    {
+        config(Arr::dot(config('admin-dog.auth', []), 'auth.'));
+    }
 
     protected function registerRouteMiddleware()
     {

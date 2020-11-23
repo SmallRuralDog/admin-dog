@@ -11,8 +11,14 @@ module.exports = {
         ? '/vendor/admin-dog/'
         : '/',
     devServer: {
-        proxy: 'http://127.0.0.1:8000'
+        proxy: {
+            '/api-admin-dog': {
+                target: 'http://127.0.0.1:8000',
+                changeOrigin: true,
+            },
+        },
+
     },
     outputDir: '../public',
-    indexPath:'../resources/views/index.blade.php',
+    indexPath: '../resources/views/index.blade.php',
 };

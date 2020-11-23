@@ -3,9 +3,15 @@
 namespace SmallRuralDog\AdminDog\Components\VForm;
 
 use SmallRuralDog\AdminDog\Components\BaseComponent;
+use SmallRuralDog\AdminDog\Traits\Component\OnCatch;
+use SmallRuralDog\AdminDog\Traits\Component\OnFinally;
+use SmallRuralDog\AdminDog\Traits\Component\OnRequesting;
+use SmallRuralDog\AdminDog\Traits\Component\OnThen;
 
 class VForm extends BaseComponent
 {
+
+    use OnCatch, OnThen, OnFinally, OnRequesting;
 
     protected $componentName = 'VFormPro';
 

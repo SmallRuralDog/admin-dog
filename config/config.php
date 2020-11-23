@@ -14,19 +14,19 @@ return [
         'prefix' => env('ADMIN_DOG_ROUTE_PREFIX', 'admin-dog'),
         'api_prefix' => env('ADMIN_DOG_API_ROUTE_PREFIX', 'api-admin-dog'),
         'middleware' => ['web', 'adminDog'],
-        'api_middleware' => ['api', 'adminDog'],
+        'api_middleware' => ['web', 'adminDog'],
     ],
     'auth' => [
         'controller' => '',
-        'guard' => 'admin',
+        'guard' => 'admin-dog',
         'guards' => [
-            'admin' => [
+            'admin-dog' => [
                 'driver' => 'session',
-                'provider' => 'admin',
+                'provider' => 'admin-dog',
             ],
         ],
         'providers' => [
-            'admin' => [
+            'admin-dog' => [
                 'driver' => 'eloquent',
                 'model' => SmallRuralDog\AdminDog\Models\AdminDogUser::class,
             ],
@@ -39,6 +39,7 @@ return [
         'excepts' => [
             'auth/login',
             'auth/logout',
+            'config.js',
             '_handle_action_',
         ],
     ],

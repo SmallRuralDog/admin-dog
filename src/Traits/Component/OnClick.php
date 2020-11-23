@@ -5,22 +5,28 @@ namespace SmallRuralDog\AdminDog\Traits\Component;
 use Closure;
 use SmallRuralDog\AdminDog\Events\ClickEvent;
 
+/**
+ * 可点击
+ * Trait OnClick
+ * @package SmallRuralDog\AdminDog\Traits\Component
+ */
 trait OnClick
 {
 
 
     /**
+     * 点击事件
      * Component click event
-     * @param Closure $click
+     * @param Closure $closure
      * @return $this
      */
-    public function onClick(Closure $click)
+    public function onClick(Closure $closure)
     {
-        $clickEvent = ClickEvent::make();
+        $event = ClickEvent::make();
 
-        call_user_func($click, $clickEvent);
+        call_user_func($closure, $event);
 
-        $this->events['click'] = $clickEvent;
+        $this->events['click'] = $event;
         return $this;
     }
 }

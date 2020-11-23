@@ -10,10 +10,6 @@ Route::group([
 ], function (Router $router) {
 
     $router->get('/', RootController::class . "@index")->name('admin-dog.root');
-    $router->get('/{path}', RootController::class . "@index")->name('admin-dog.root')->where('path','.*');
-
-    $router->get('home', \App\AdminDog\Controllers\HomeController::class . '@index')->name('admin-dog.home');
-
 
 });
 Route::group([
@@ -23,9 +19,7 @@ Route::group([
 ], function (Router $router) {
     $router->get('config.js', RootController::class . "@config")->name('admin-dog.config');
     $router->get('adminDog.js', RootController::class . "@scripts")->name('admin-dog.scripts');
-
-
     $router->get('auth/login', \SmallRuralDog\AdminDog\Controllers\AuthController::class . "@login");
-    $router->post('auth/loginPost', \SmallRuralDog\AdminDog\Controllers\AuthController::class . "@loginPost")->name('admin-dog.login-post');
+    $router->any('auth/loginPost', \SmallRuralDog\AdminDog\Controllers\AuthController::class . "@loginPost")->name('admin-dog.login-post');
 
 });

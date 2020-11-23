@@ -7,6 +7,7 @@
                 :style="slot.style"
                 :is="slot.componentName"
                 :attrs="slot"
+                v-bind="$attrs"
             />
         </template>
     </v-row>
@@ -14,7 +15,7 @@
 
 <script>
 export default {
-    props: ['attrs']
+    props: ['attrs','fields']
 }
 </script>
 

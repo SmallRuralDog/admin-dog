@@ -4,10 +4,12 @@
 namespace SmallRuralDog\AdminDog\Components;
 
 
-use SmallRuralDog\AdminDog\Components\VGrid\VCard;
+use SmallRuralDog\AdminDog\Traits\Component\OnClick;
 
 class Element extends BaseComponent
 {
+    use OnClick;
+
     protected $componentName = "VElementPro";
 
     protected $elementName;

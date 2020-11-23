@@ -1,1 +1,3 @@
 window.AdminDogConfig = @json($config)
+
+

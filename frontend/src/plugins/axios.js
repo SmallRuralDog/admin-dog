@@ -4,11 +4,10 @@ import router from "../router";
 
 axios.interceptors.request.use(
     config => {
-        config.headers["X-Requested-With"] = "XMLHttpRequest";
-
-        config.headers["X-CSRF-TOKEN"] = window.AdminDogConfig.csrfToken;
-
+        //config.headers["X-Requested-With"] = "XMLHttpRequest";
+        config.baseURL = window.AdminDogConfig.apiRoot;
         return config;
+
     },
     error => {
         Promise.reject(error);
@@ -19,8 +18,7 @@ axios.interceptors.response.use(
         // 对响应数据做点什么
         switch (data.code) {
             case 400:
-
-                break;
+                return Promise.reject(data);
             case 301:
                 window.location.href = data.data;
                 break;
@@ -28,8 +26,7 @@ axios.interceptors.response.use(
                 router.replace(data.data);
                 break;
             case 200:
-
-                break;
+                return data;
         }
         return data;
     },
@@ -38,6 +35,7 @@ axios.interceptors.response.use(
         // 对响应错误做点什么
         switch (response.status) {
             case 404:
+                router.replace('/404');
                 break;
             case 401:
 
@@ -52,7 +50,7 @@ axios.interceptors.response.use(
                 break;
         }
 
-        return Promise.reject(response);
+        return Promise.reject(response.data);
     }
 );
 

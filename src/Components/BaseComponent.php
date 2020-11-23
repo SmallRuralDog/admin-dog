@@ -26,9 +26,10 @@ class BaseComponent extends AdminJsonBuilder
     }
 
     /**
+     * 组件插槽
      * Add component slots or child elements
      * @param BaseComponent|Closure|string $slot
-     * @param string $name
+     * @param string $name 插槽名称
      * @return $this
      */
     public function slot($slot, $name = 'default')
@@ -51,6 +52,7 @@ class BaseComponent extends AdminJsonBuilder
     }
 
     /**
+     * 设置组件class名称
      * Set component class
      * @param $class
      * @return $this
@@ -62,6 +64,7 @@ class BaseComponent extends AdminJsonBuilder
     }
 
     /**
+     * 设置组件内置样式
      * Set component style
      * @param $style
      * @return $this
@@ -73,6 +76,19 @@ class BaseComponent extends AdminJsonBuilder
     }
 
     /**
+     * 设置组件属性
+     * @param $name
+     * @param bool $value
+     * @return $this
+     */
+    public function attr($name, $value = true)
+    {
+        $this->$name = $value;
+        return $this;
+    }
+
+    /**
+     * 设置数据prop
      * Set component props
      * @param $name
      * @param bool $value
@@ -85,6 +101,7 @@ class BaseComponent extends AdminJsonBuilder
     }
 
     /**
+     * 添加数据事件监听，多次调用可同时监听不同事件
      * Set component listening
      * @param EventListener|Closure $listener
      * @return $this

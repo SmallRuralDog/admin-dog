@@ -25,9 +25,9 @@ export default {
     },
     methods: {
         getView() {
-            let viewUrl = window.AdminDogConfig.apiRoot + this.$route.fullPath;
+
             NProgress.start(800);
-            this.$http.get(viewUrl, {
+            this.$http.get(this.$route.fullPath, {
                 params: this.params
             }).then(data => {
                 this.componentData = data;

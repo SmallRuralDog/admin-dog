@@ -2,8 +2,13 @@
 
 namespace SmallRuralDog\AdminDog;
 
+use Illuminate\Support\Facades\Auth;
+use SmallRuralDog\AdminDog\Models\AdminDogUser;
+use SmallRuralDog\AdminDog\Traits\AdminDogBase;
+
 class AdminDog
 {
+    use AdminDogBase;
 
     public static $scripts = [];
 
@@ -24,7 +29,6 @@ class AdminDog
     public function bootstrap()
     {
 
-        self::script(__DIR__ . '/../resources/js/adminDogFunction.js');
 
         require config('admin-dog.bootstrap', $this->path('bootstrap.php'));
     }
@@ -32,5 +36,21 @@ class AdminDog
     public function path($path = '')
     {
         return ucfirst(config('admin-dog.directory')) . ($path ? DIRECTORY_SEPARATOR . $path : $path);
+    }
+
+
+    /**
+     * @return \Illuminate\Contracts\Auth\Authenticatable|null|AdminDogUser
+     */
+    public function user()
+    {
+        return $this->guard()->user();
+    }
+
+    public function guard()
+    {
+        $guard = config('admin-dog.auth.guard') ?: 'admin-dog';
+
+        return Auth::guard($guard);
     }
 }

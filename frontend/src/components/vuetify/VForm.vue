@@ -31,13 +31,21 @@ export default {
         submit() {
             this.$refs.form.validate();
             if (this.$refs.form.validate(true)) {
-
                 //if set action
                 if (this.attrs.action) {
-                    this.$http['post'](this.attrs.action,this.fields)
+                    this.requesting = true;
+                    this.baseRequesting();
+                    this.$http.post(this.attrs.action, this.fields).then((res) => {
+                        this.response = res
+                        this.baseThen();
+                    }).catch(err => {
+                        this.error = err
+                        this.baseCatch();
+                    }).finally(() => {
+                        this.requesting = true;
+                        this.baseFinally();
+                    })
                 }
-
-
             }
         },
         //Resets the state of all registered inputs (inside the form) to {} for arrays and null for all other values. Resets errors bag when using the lazy-validation prop.

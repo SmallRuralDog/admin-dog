@@ -10,5 +10,6 @@ class AdminDogUser extends Authenticatable
 {
 
     protected $table = 'admin_dog_users';
+    protected $guarded = [];
 
 }
