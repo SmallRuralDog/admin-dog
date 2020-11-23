@@ -46,11 +46,10 @@ axios.interceptors.response.use(
                 location.reload();
                 break;
             default:
-
-                break;
+                return Promise.reject(response.data);
         }
 
-        return Promise.reject(response.data);
+
     }
 );
 

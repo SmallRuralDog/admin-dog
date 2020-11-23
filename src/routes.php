@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Routing\Router;
+use SmallRuralDog\AdminDog\Controllers\AuthController;
 use SmallRuralDog\AdminDog\Controllers\RootController;
 
 Route::group([
@@ -8,9 +9,7 @@ Route::group([
     'prefix' => config('admin-dog.route.prefix'),
     'middleware' => config('admin-dog.route.middleware'),
 ], function (Router $router) {
-
     $router->get('/', RootController::class . "@index")->name('admin-dog.root');
-
 });
 Route::group([
     'domain' => config('admin-dog.route.domain'),
@@ -19,7 +18,16 @@ Route::group([
 ], function (Router $router) {
     $router->get('config.js', RootController::class . "@config")->name('admin-dog.config');
     $router->get('adminDog.js', RootController::class . "@scripts")->name('admin-dog.scripts');
-    $router->get('auth/login', \SmallRuralDog\AdminDog\Controllers\AuthController::class . "@login");
-    $router->any('auth/loginPost', \SmallRuralDog\AdminDog\Controllers\AuthController::class . "@loginPost")->name('admin-dog.login-post');
+    $router->any('auth/login', AuthController::class . "@login");
+    $router->any('auth/loginPost', AuthController::class . "@loginPost")->name('admin-dog.login-post');
+    $router->group([
+        'middleware' => 'adminDog.auth',
+    ], function (Router $router) {
+        $router->any('init', RootController::class . '@init');
+
+        $router->get('auth/logout', AuthController::class . '@logout')->name('admin.logout');
+
+    });
+
 
 });

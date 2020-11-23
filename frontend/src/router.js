@@ -22,12 +22,8 @@ const router = new Router({
     // This is for the scroll top when click on any router link
     routes: [
         {
-            path: '/',
-            redirect: '/auth/login'
-        },
-        {
-            path: "/main",
-            component: () => import('@/layouts/full-layout/Layout'),
+            path: "/auth",
+            component: () => import('@/layouts/blank-layout/BlankLayout'),
             children: [
                 {
                     path: "*",
@@ -36,8 +32,8 @@ const router = new Router({
             ]
         },
         {
-            path: "/auth",
-            component: () => import('@/layouts/blank-layout/BlankLayout'),
+            path: "/",
+            component: () => import('@/layouts/full-layout/Layout'),
             children: [
                 {
                     path: "*",

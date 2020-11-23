@@ -19,11 +19,17 @@ trait AdminDogBase
 
     public function response($data, $message = '', $code = 200, $headers = [])
     {
-        return Response::json([
+        $res = [
             'code' => $code,
             'message' => $message,
-            'data' => $data
-        ], 200, $headers);
+        ];
+
+        if ($data) {
+            $res['data'] = $data;
+        }
+
+
+        return Response::json($res, 200, $headers);
     }
 
     public function responseMessage($message = '', $code = 200)

@@ -189,8 +189,8 @@
           </v-list-item-avatar>
 
           <v-list-item-content>
-            <v-list-item-title>Donathan Deo</v-list-item-title>
-            <v-list-item-subtitle>Webdesigner</v-list-item-subtitle>
+            <v-list-item-title>{{initData.user.name}}</v-list-item-title>
+            <v-list-item-subtitle>{{initData.user.email}}</v-list-item-subtitle>
           </v-list-item-content>
 
           <v-list-item-action>
@@ -300,7 +300,7 @@ export default {
       { title: "My Balance", to: "/apps/contact-grid" },
       { title: "Inbox", to: "/apps/email/inbox" },
       { title: "Account Setting", to: "/form-layouts/flformbasic" },
-      { title: "Logout", to: "/authentication/boxedlogin" },
+      { title: "Logout", to: "/auth/logout" },
     ],
     href() {
       return undefined;
@@ -308,7 +308,7 @@ export default {
   }),
 
   computed: {
-    ...mapState(["navbarColor", "Sidebar_drawer"]),
+    ...mapState(["navbarColor", "Sidebar_drawer",'initData']),
   },
 
   methods: {

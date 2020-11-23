@@ -24,14 +24,25 @@ use SmallRuralDog\AdminDog\Events\ClickEvent;
 use SmallRuralDog\AdminDog\Events\EventListener;
 use SmallRuralDog\AdminDog\Events\FinallyEvent;
 use SmallRuralDog\AdminDog\Events\RequestingEvent;
-use SmallRuralDog\AdminDog\Models\AdminDogUser;
 
 class AuthController extends AdminDogController
 {
 
+    public function logout(Request $request)
+    {
+        $this->guard()->logout();
+
+        $request->session()->invalidate();
+        return \AdminDog::fullPath("/auth/login");
+    }
 
     public function login()
     {
+
+        if ($this->guard()->check()) {
+            return \AdminDog::fullPath("/");
+        }
+
 
         $container = VContainer::make()->class('fill-height justify-center');
         $container->slot(function () {
@@ -76,7 +87,7 @@ JS;
                                             )
                                             ->slot(
                                                 VForm::make()
-                                                    ->fields(['username' => '296404875@qq.com', 'password' => '123456', 'remember' => true])
+                                                    ->fields(['email' => '296404875@qq.com', 'password' => '123456', 'remember' => true])
                                                     ->action(route('admin-dog.login-post'))
                                                     ->addEventListener(function (EventListener $eventListener) {
                                                         $eventListener->listener("submit");
@@ -88,7 +99,6 @@ JS;
                                                     })
                                                     ->onCatch(function (CatchEvent $catchEvent) {
                                                         $js = <<<JS
-console.log(_this.error)
 _this.\$toast.error(_this.error.message)
 JS;
                                                         $catchEvent->jsCode($js);
@@ -102,7 +112,7 @@ JS;
                                                     ->attr('loading', false)
                                                     ->slot(function () {
                                                         return VTextField::make()
-                                                            ->vModel('username')
+                                                            ->vModel('email')
                                                             ->class('mt-4')
                                                             ->rule("!!v || 'Name is required'")
                                                             ->rule('/.+@.+\..+/.test(v) || "E-mail must be valid"')
@@ -166,16 +176,22 @@ JS;
 
     public function loginPost(Request $request)
     {
-
-        $credentials = $request->only('username', 'password');
-
-        $remember = $request->get('remember', false);
-
-
-        if ($this->guard()->attempt($credentials, $remember)) {
-            return \AdminDog::vueRouterTo('/main/index');
+        try {
+            $this->validatorData($request, [
+                'email' => 'required|email',
+                'password' => 'required',
+            ]);
+            $credentials = $request->only('email', 'password');
+            $remember = $request->get('remember', false);
+            if ($this->guard()->attempt($credentials, $remember)) {
+                return \AdminDog::vueRouterTo('/');
+            }
+            return $this->responseError($this->getFailedLoginMessage());
+        } catch (\Exception $exception) {
+            return $this->responseError($exception->getMessage());
         }
-        return $this->responseError($this->getFailedLoginMessage());
+
+
     }
 
 

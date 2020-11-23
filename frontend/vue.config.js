@@ -9,15 +9,9 @@ module.exports = {
     },
     publicPath: process.env.NODE_ENV === 'production'
         ? '/vendor/admin-dog/'
-        : '/',
+        : 'http://192.168.31.2:8080/',
     devServer: {
-        proxy: {
-            '/api-admin-dog': {
-                target: 'http://127.0.0.1:8000',
-                changeOrigin: true,
-            },
-        },
-
+        proxy: 'http://192.168.31.2:8000/',
     },
     outputDir: '../public',
     indexPath: '../resources/views/index.blade.php',

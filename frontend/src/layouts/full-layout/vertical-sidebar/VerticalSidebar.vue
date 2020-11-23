@@ -19,7 +19,8 @@
             </v-list-item-avatar>
 
             <v-list-item-content>
-                <v-list-item-title>Dohnathan Deo</v-list-item-title>
+                <v-list-item-title>{{ initData.user.name }}</v-list-item-title>
+                <v-list-item-subtitle>{{initData.user.email}}</v-list-item-subtitle>
             </v-list-item-content>
         </v-list-item>
         <v-divider></v-divider>
@@ -67,7 +68,7 @@ export default {
         items: VerticalSidebarItems,
     }),
     computed: {
-        ...mapState(["SidebarColor", "SidebarBg"]),
+        ...mapState(["SidebarColor", "SidebarBg","initData"]),
         Sidebar_drawer: {
             get() {
                 return this.$store.state.Sidebar_drawer;

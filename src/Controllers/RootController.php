@@ -4,6 +4,7 @@ namespace SmallRuralDog\AdminDog\Controllers;
 
 use App\Http\Controllers\Controller;
 use SmallRuralDog\AdminDog\AdminDog;
+use SmallRuralDog\AdminDog\Components\VBtn\VBtn;
 
 class RootController extends Controller
 {
@@ -14,6 +15,10 @@ class RootController extends Controller
         return view('admin-dog::index');
     }
 
+    public function empty(){
+        return VBtn::make()->slot("404");
+    }
+
 
     public function config()
     {
@@ -21,7 +26,6 @@ class RootController extends Controller
         $config = [
             'logo' => config('admin-dog.logo'),
             'apiRoot' => config('admin-dog.route.api_prefix'),
-            'csrfToken'=>csrf_token(),
         ];
         return response(
             view('admin-dog::js-config', ['config' => $config]),
@@ -33,12 +37,23 @@ class RootController extends Controller
 
     }
 
+
+    public function init()
+    {
+        $user = \AdminDog::user();
+
+        $res = [
+            'user' => $user,
+        ];
+
+        return \AdminDog::response($res);
+
+    }
+
     public function scripts()
     {
 
         $js = '';
-
-
         foreach (AdminDog::scripts() as $path) {
             $js .= file_get_contents($path);
         }
