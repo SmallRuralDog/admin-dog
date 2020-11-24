@@ -6,7 +6,7 @@
         </template>
     </v-icon>
     <v-icon v-bind="attrs.props" v-else>
-        <template v-for="slot in attrs.slots">
+        <template v-for="slot in attrs.children">
             {{ slot }}
         </template>
     </v-icon>

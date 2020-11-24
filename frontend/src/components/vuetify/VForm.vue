@@ -1,13 +1,6 @@
 <template>
     <v-form ref="form" v-bind="attrs.props" @submit="submit">
-        <template v-for="(slot,name) in attrs.slots">
-            <BaseSlot
-                :key="name"
-                :slot-data="slot"
-                :fields="fields"
-                v-bind="$attrs"
-            />
-        </template>
+        <BaseSlots :attrs="attrs"/>
     </v-form>
 </template>
 

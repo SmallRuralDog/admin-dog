@@ -1,15 +1,6 @@
 <template>
     <v-toolbar v-bind="attrs">
-        <template v-for="(slot,name) in attrs.slots" :slot="name">
-            <component
-                :key="name"
-                :class="slot.class"
-                :style="slot.style"
-                :is="slot.componentName"
-                :attrs="slot"
-                v-bind="$attrs"
-            />
-        </template>
+        <BaseSlots :attrs="attrs"/>
     </v-toolbar>
 </template>
 

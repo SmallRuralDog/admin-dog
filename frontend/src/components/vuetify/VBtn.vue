@@ -1,12 +1,6 @@
 <template>
     <v-btn v-if="vif" v-bind="attrs.props" @click="onClick">
-        <template v-for="(slot,name) in attrs.slots" :slot="name">
-            <BaseSlot
-                :key="name"
-                :slot-data="slot"
-                v-bind="$attrs"
-            />
-        </template>
+        <BaseSlots :attrs="attrs"/>
     </v-btn>
 </template>
 

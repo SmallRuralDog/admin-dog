@@ -30,23 +30,23 @@ class BaseComponent extends AdminJsonBuilder
      * 组件插槽
      * Add component slots or child elements
      * @param BaseComponent|Closure|string $slot
-     * @param string $name 插槽名称
+     * @param string|null $name 插槽名称
      * @return $this
      */
-    public function slot($slot, $name = 'default')
+    public function slot($slot, $name = null)
     {
 
-        $slotName = $name;
-        if (isset($this->slots) && data_get($this->slots, $name) != null && $name == 'default') {
-            $slotName = "list-" . count($this->slots);
-        }
         if ($slot instanceof Closure) {
             $slot = call_user_func($slot);
             abort_if(empty($slot), 400, "The content cannot be empty");
-            $this->slots[$slotName] = $slot;
-        } else {
-            $this->slots[$slotName] = $slot;
         }
+
+        if (empty($name)) {
+            $this->children[] = $slot;
+        } else {
+            $this->slots[$name] = $slot;
+        }
+
         return $this;
     }
 

@@ -1,12 +1,6 @@
 <template>
     <v-data-table v-bind="attrs.props">
-        <template v-for="(slot,name) in attrs.slots" :slot="name">
-            <BaseSlot
-                :key="name"
-                :slot-data="slot"
-                v-bind="$attrs"
-            />
-        </template>
+        <BaseSlots :attrs="attrs"/>
     </v-data-table>
 </template>
 
