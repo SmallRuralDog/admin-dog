@@ -1,5 +1,13 @@
 <template>
-    <v-text-field v-bind="attrs.props" :value="value" @change="onChange"></v-text-field>
+    <v-text-field v-bind="attrs.props" :value="value" @change="onChange">
+        <template v-for="(slot,name) in attrs.slots" :slot="name">
+            <BaseSlot
+                :key="name"
+                :slot-data="slot"
+                v-bind="$attrs"
+            />
+        </template>
+    </v-text-field>
 </template>
 
 <script>

@@ -142,9 +142,14 @@ JS;
                                                             })
                                                             ->slot(Element::make('div')
                                                                 ->class('ml-auto')
-                                                                ->slot('<a href="javascript:void(0)" class="link">Forgot pwd?</a>')
+                                                                ->slot(Element::make('a')->slot('Forgot pwd?')->class('link'))
                                                             );
-                                                    })->slot(VBtn::make()->slot("Sign In")->class('mr-4')->prop('block')->prop('color', 'info')->prop('loading', false)
+                                                    })->slot(VBtn::make()
+                                                        ->slot("Sign In")
+                                                        ->class('mr-4')
+                                                        ->prop('block')
+                                                        ->prop('color','primary')
+                                                        ->prop('loading', false)
                                                         ->addEventListener(function (EventListener $eventListener) {
                                                             $eventListener->listener("loginLoading");
                                                             $eventListener->listenerCode("_this.attrs.props.loading=true");

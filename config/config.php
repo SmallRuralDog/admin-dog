@@ -34,4 +34,15 @@ return [
         // Add "remember me" to login form
         'remember' => true,
     ],
+    'theme' => [
+        'themecolor' => '#1e88e5',
+        'themecolors' => [
+            "#1e88e6",
+            "#21c1d6",
+            "#fc4b6c",
+            "#563dea",
+            "#46cc57",
+            "#ff9800",
+        ],
+    ]
 ];

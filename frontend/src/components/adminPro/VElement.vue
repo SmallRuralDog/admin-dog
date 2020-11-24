@@ -3,25 +3,12 @@
         :is="attrs.elementName"
         :class="attrs.class"
         :style="attrs.style"
-        v-if="typeof(attrs.slots)=='string'"
-        v-bind="attrs.props"
-        v-html="attrs.slots"
-    >
-    </component>
-    <component
-        v-else
-        :is="attrs.elementName"
-        :class="attrs.class"
-        :style="attrs.style"
         v-bind="attrs.props"
     >
         <template v-for="(slot,name) in attrs.slots">
-            <component
+            <BaseSlot
                 :key="name"
-                :class="slot.class"
-                :style="slot.style"
-                :is="slot.componentName"
-                :attrs="slot"
+                :slot-data="slot"
                 v-bind="$attrs"
             />
         </template>

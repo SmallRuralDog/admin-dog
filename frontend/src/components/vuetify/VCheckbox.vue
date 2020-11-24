@@ -1,5 +1,13 @@
 <template>
-    <v-checkbox v-bind="attrs.props" v-model="value" @change="onChange"></v-checkbox>
+    <v-checkbox v-bind="attrs.props" v-model="value" @change="onChange">
+        <template v-for="(slot,name) in attrs.slots" :slot="name">
+            <BaseSlot
+                :key="name"
+                :slot-data="slot"
+                v-bind="$attrs"
+            />
+        </template>
+    </v-checkbox>
 </template>
 
 <script>

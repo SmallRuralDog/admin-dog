@@ -14,6 +14,7 @@ class BaseComponent extends AdminJsonBuilder
 {
     protected $componentName = "";
 
+
     /**
      * Sets the name of the render component
      * @param string $componentName
@@ -43,10 +44,8 @@ class BaseComponent extends AdminJsonBuilder
             $slot = call_user_func($slot);
             abort_if(empty($slot), 400, "The content cannot be empty");
             $this->slots[$slotName] = $slot;
-        } else if ($slot instanceof BaseComponent) {
+        } else {
             $this->slots[$slotName] = $slot;
-        } else {// is String
-            $this->slots = $slot;
         }
         return $this;
     }

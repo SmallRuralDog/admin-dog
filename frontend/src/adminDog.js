@@ -12,6 +12,9 @@ import InstantSearch from "vue-instantsearch";
 import VueBus from 'vue-bus';
 import lodash from 'lodash'
 
+import frag from 'vue-frag';
+Vue.directive('frag', frag);
+
 Vue.prototype.$http = axios;
 Vue.prototype.axios = axios;
 

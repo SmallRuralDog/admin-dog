@@ -37,6 +37,22 @@ const BaseComponent = {
         }
     },
     methods: {
+        baseEvent(name) {
+            if (this.attrs.events && this.attrs.events[name]) {
+                /**
+                 * 如果是触发事件
+                 * If it's a triggering event
+                 */
+                this.attrs.events[name].emits && this.attrs.events[name].emits.length > 0 && this.attrs.events[name].emits.map(emit => {
+                    this.$bus.emit(emit, this);
+                });
+                /**
+                 * 如果是执行代码
+                 * If you're executing code
+                 */
+                this.attrs.events[name].jsCode && new Function('_this', this.attrs.events[name].jsCode)(this)
+            }
+        },
         baseClick() {
             if (this.attrs.events && this.attrs.events.click) {
                 /**

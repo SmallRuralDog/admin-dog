@@ -1,14 +1,10 @@
 <template>
-    <v-btn v-if="typeof(attrs.slots)=='string' && vif" v-bind="attrs.props" v-html="attrs.slots" @click="onClick">
-    </v-btn>
-    <v-btn v-else-if="vif" v-bind="attrs.props">
-        <template v-for="(slot,name) in attrs.slots">
-            <component
+    <v-btn v-if="vif" v-bind="attrs.props" @click="onClick">
+        <template v-for="(slot,name) in attrs.slots" :slot="name">
+            <BaseSlot
                 :key="name"
-                :class="slot.class"
-                :style="slot.style"
-                :is="slot.componentName"
-                :attrs="slot"
+                :slot-data="slot"
+                v-bind="$attrs"
             />
         </template>
     </v-btn>

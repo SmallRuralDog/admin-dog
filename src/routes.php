@@ -24,8 +24,10 @@ Route::group([
         'middleware' => 'adminDog.auth',
     ], function (Router $router) {
         $router->any('init', RootController::class . '@init');
-
         $router->get('auth/logout', AuthController::class . '@logout')->name('admin.logout');
+
+        $router->get('system/menus', \SmallRuralDog\AdminDog\Controllers\MenuController::class . '@index');
+        $router->get('system/users', \SmallRuralDog\AdminDog\Controllers\UserController::class . '@index');
 
     });
 

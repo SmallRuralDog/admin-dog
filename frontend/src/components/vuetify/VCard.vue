@@ -1,12 +1,9 @@
 <template>
-    <v-card v-bind="attrs.props">
-        <template v-for="(slot,name) in attrs.slots">
-            <component
+    <v-card v-if="vif" v-bind="attrs.props">
+        <template v-for="(slot,name) in attrs.slots" :slot="name">
+            <BaseSlot
                 :key="name"
-                :class="slot.class"
-                :style="slot.style"
-                :is="slot.componentName"
-                :attrs="slot"
+                :slot-data="slot"
                 v-bind="$attrs"
             />
         </template>
@@ -14,8 +11,11 @@
 </template>
 
 <script>
+import {BaseComponent} from "@/components/mixins";
+
 export default {
-    props: ['attrs']
+    props: ['attrs'],
+    mixins: [BaseComponent]
 }
 </script>
 
