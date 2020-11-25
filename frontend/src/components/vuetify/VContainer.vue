@@ -1,6 +1,19 @@
 <template>
     <v-container v-bind="attrs.props">
-        <BaseSlots :attrs="attrs"/>
+        <template v-for="(slot,name) in attrs.slots" :slot="name">
+            <BaseSlot
+                :key="name"
+                :slot-data="slot"
+                v-bind="$attrs"
+            />
+        </template>
+        <template v-for="(slot,name) in attrs.children">
+            <BaseSlot
+                :key="name"
+                :slot-data="slot"
+                v-bind="$attrs"
+            />
+        </template>
     </v-container>
 </template>
 

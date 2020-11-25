@@ -1,5 +1,5 @@
 <template>
-    <div v-frag>
+    <v-card-subtitle v-if="vif" v-bind="attrs.props">
         <template v-for="(slot,name) in attrs.slots" :slot="name">
             <BaseSlot
                 :key="name"
@@ -14,12 +14,15 @@
                 v-bind="$attrs"
             />
         </template>
-    </div>
+    </v-card-subtitle>
 </template>
 
 <script>
+import {BaseComponent} from "@/components/mixins";
+
 export default {
-    name: "BaseSlots",
-    props: ['attrs']
+    props: ['attrs'],
+    mixins: [BaseComponent]
 }
 </script>
+

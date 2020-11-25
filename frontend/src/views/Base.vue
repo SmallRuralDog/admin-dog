@@ -26,7 +26,7 @@ export default {
     methods: {
         getView() {
 
-            NProgress.start(800);
+            NProgress.configure({ showSpinner: false }).start(800);
             this.$http.get(this.$route.fullPath, {
                 params: this.params
             }).then(data => {

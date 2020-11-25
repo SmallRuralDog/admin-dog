@@ -1,5 +1,5 @@
 <template>
-    <v-row v-if="vif" v-bind="attrs.props">
+    <v-card-actions v-if="vif" v-bind="attrs.props">
         <template v-for="(slot,name) in attrs.slots" :slot="name">
             <BaseSlot
                 :key="name"
@@ -14,7 +14,7 @@
                 v-bind="$attrs"
             />
         </template>
-    </v-row>
+    </v-card-actions>
 </template>
 
 <script>

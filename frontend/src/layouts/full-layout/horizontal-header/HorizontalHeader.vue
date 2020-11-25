@@ -58,7 +58,7 @@
       <!-- ---------------------------------- -->
       <!---Search part -->
       <!-- ---------------------------------- -->
-      <v-btn dark icon class="mr-1 d-sm-block d-none" @click="searchbox">
+      <v-btn dark icon class="mr-1 d-sm-block d-none" @click="searchbox" v-if="false">
         <v-icon>mdi-magnify</v-icon>
       </v-btn>
 

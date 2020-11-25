@@ -45,7 +45,7 @@ class RootController extends Controller
     {
         $user = \AdminDog::user();
 
-        $menus = AdminDogMenu::query()->get()->toArray();
+        $menus = AdminDogMenu::query()->orderByDesc('order')->get()->toArray();
 
         $res = [
             'user' => $user,

@@ -1,6 +1,21 @@
 <template>
     <v-form ref="form" v-bind="attrs.props" @submit="submit">
-        <BaseSlots :attrs="attrs"/>
+        <template v-for="(slot,name) in attrs.slots" :slot="name">
+            <BaseSlot
+                :key="name"
+                :slot-data="slot"
+                v-bind="$attrs"
+                :fields="fields"
+            />
+        </template>
+        <template v-for="(slot,name) in attrs.children">
+            <BaseSlot
+                :key="name"
+                :slot-data="slot"
+                v-bind="$attrs"
+                :fields="fields"
+            />
+        </template>
     </v-form>
 </template>
 

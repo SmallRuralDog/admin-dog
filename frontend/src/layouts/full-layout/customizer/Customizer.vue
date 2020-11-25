@@ -54,7 +54,7 @@
         <!---Theme color -->
         <div class="px-4 py-4">
             <span>Theme Color</span>
-            <v-item-group v-model="themecolor">
+            <v-item-group v-model="themecolor" mandatory>
                 <v-item
                     v-for="tcolor in themecolors"
                     :key="tcolor"

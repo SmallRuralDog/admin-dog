@@ -47,7 +47,8 @@ class AuthController extends AdminDogController
         $container = VContainer::make()->class('fill-height justify-center');
         $container->slot(function () {
             return VRow::make()->prop('justify', 'center')->slot(function () {
-                return VCol::make()->prop('lg', '11')->prop('sm', '8')->prop('xl', '7')->slot(function () {
+                return VCol::make()->prop('lg', '11')->prop('sm', '8')->prop('xl', '7')
+                    ->slot(function () {
                     return VCard::make()
                         ->class('elevation-4')
                         ->slot(function () {

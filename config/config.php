@@ -37,7 +37,7 @@ return [
     'theme' => [
         'themecolor' => '#1e88e5',
         'themecolors' => [
-            "#1e88e6",
+            "#1e88e5",
             "#21c1d6",
             "#fc4b6c",
             "#563dea",

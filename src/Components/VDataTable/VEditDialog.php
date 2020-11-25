@@ -1,16 +1,18 @@
 <?php
 
+
 namespace SmallRuralDog\AdminDog\Components\VDataTable;
+
 
 use SmallRuralDog\AdminDog\Components\BaseComponent;
 
-class VDataTable extends BaseComponent
+class VEditDialog extends BaseComponent
 {
-    protected $componentName = 'VDataTablePro';
-
+    protected $componentName = 'VEditDialogPro';
 
     public static function make()
     {
         return new static();
     }
+
 }

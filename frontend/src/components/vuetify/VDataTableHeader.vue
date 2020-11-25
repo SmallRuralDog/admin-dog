@@ -1,9 +1,10 @@
 <template>
-    <v-row v-if="vif" v-bind="attrs.props">
-        <template v-for="(slot,name) in attrs.slots" :slot="name">
+    <v-data-table-header v-bind="attrs.props">
+        <template v-for="(slot,name) in attrs.slots" v-slot:[name]="data">
             <BaseSlot
                 :key="name"
                 :slot-data="slot"
+                :data="data"
                 v-bind="$attrs"
             />
         </template>
@@ -14,7 +15,7 @@
                 v-bind="$attrs"
             />
         </template>
-    </v-row>
+    </v-data-table-header>
 </template>
 
 <script>
@@ -22,7 +23,6 @@ import {BaseComponent} from "@/components/mixins";
 
 export default {
     props: ['attrs'],
-    mixins: [BaseComponent]
+    mixins: [BaseComponent],
 }
 </script>
-
