@@ -2,6 +2,7 @@ const BaseComponent = {
     data() {
         return {
             vif: true,//组件v-if
+            eventData: null,//事件数据
             requesting: false,//组件是否请求中
             response: null,//组件请求成功相应
             error: null,//组件请求失败响应
@@ -37,8 +38,9 @@ const BaseComponent = {
         }
     },
     methods: {
-        baseEvent(name) {
+        baseEvent(name, eventData = null) {
             if (this.attrs.events && this.attrs.events[name]) {
+                this.eventData = eventData;
                 /**
                  * 如果是触发事件
                  * If it's a triggering event
