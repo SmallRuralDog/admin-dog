@@ -1,6 +1,8 @@
 const BaseComponent = {
+    props: ['fields'],
     data() {
         return {
+            value: null,
             vif: true,//组件v-if
             eventData: null,//事件数据
             requesting: false,//组件是否请求中
@@ -38,6 +40,7 @@ const BaseComponent = {
         }
     },
     methods: {
+        //触发事件
         baseEvent(name, eventData = null) {
             if (this.attrs.events && this.attrs.events[name]) {
                 this.eventData = eventData;
@@ -55,103 +58,6 @@ const BaseComponent = {
                 this.attrs.events[name].jsCode && new Function('_this', this.attrs.events[name].jsCode)(this)
             }
         },
-        baseClick() {
-            if (this.attrs.events && this.attrs.events.click) {
-                /**
-                 * 如果是触发事件
-                 * If it's a triggering event
-                 */
-                this.attrs.events.click.emits && this.attrs.events.click.emits.length > 0 && this.attrs.events.click.emits.map(emit => {
-                    this.$bus.emit(emit, this);
-                });
-                /**
-                 * 如果是执行代码
-                 * If you're executing code
-                 */
-                this.attrs.events.click.jsCode && new Function('_this', this.attrs.events.click.jsCode)(this)
-
-            }
-        },
-        baseChange() {
-            if (this.attrs.events && this.attrs.events.change) {
-                /**
-                 * 如果是触发事件
-                 * If it's a triggering event
-                 */
-                this.attrs.events.change.emits && this.attrs.events.change.emits.length > 0 && this.attrs.events.change.emits.map(emit => {
-                    this.$bus.emit(emit, this);
-                });
-                /**
-                 * 如果是执行代码
-                 * If you're executing code
-                 */
-                this.attrs.events.change.jsCode && new Function('_this', this.attrs.events.change.jsCode)(this)
-            }
-        },
-        baseRequesting() {
-            if (this.attrs.events && this.attrs.events.requesting) {
-                /**
-                 * 如果是触发事件
-                 * If it's a triggering event
-                 */
-                this.attrs.events.requesting.emits && this.attrs.events.requesting.emits.length > 0 && this.attrs.events.requesting.emits.map(emit => {
-                    this.$bus.emit(emit, this);
-                });
-                /**
-                 * 如果是执行代码
-                 * If you're executing code
-                 */
-                this.attrs.events.requesting.jsCode && new Function('_this', this.attrs.events.requesting.jsCode)(this)
-            }
-        },
-        baseThen() {
-            if (this.attrs.events && this.attrs.events.then) {
-                /**
-                 * 如果是触发事件
-                 * If it's a triggering event
-                 */
-                this.attrs.events.then.emits && this.attrs.events.then.emits.length > 0 && this.attrs.events.then.emits.map(emit => {
-                    this.$bus.emit(emit, this);
-                });
-                /**
-                 * 如果是执行代码
-                 * If you're executing code
-                 */
-                this.attrs.events.then.jsCode && new Function('_this', this.attrs.events.then.jsCode)(this)
-            }
-        },
-        baseCatch() {
-            if (this.attrs.events && this.attrs.events.catch) {
-                /**
-                 * 如果是触发事件
-                 * If it's a triggering event
-                 */
-                this.attrs.events.catch.emits && this.attrs.events.catch.emits.length > 0 && this.attrs.events.catch.emits.map(emit => {
-                    this.$bus.emit(emit, this);
-                });
-                /**
-                 * 如果是执行代码
-                 * If you're executing code
-                 */
-                this.attrs.events.catch.jsCode && new Function('_this', this.attrs.events.catch.jsCode)(this)
-            }
-        },
-        baseFinally() {
-            if (this.attrs.events && this.attrs.events.finally) {
-                /**
-                 * 如果是触发事件
-                 * If it's a triggering event
-                 */
-                this.attrs.events.finally.emits && this.attrs.events.finally.emits.length > 0 && this.attrs.events.finally.emits.map(emit => {
-                    this.$bus.emit(emit, this);
-                });
-                /**
-                 * 如果是执行代码
-                 * If you're executing code
-                 */
-                this.attrs.events.finally.jsCode && new Function('_this', this.attrs.events.finally.jsCode)(this)
-            }
-        }
     },
     created() {
         /**
@@ -162,6 +68,57 @@ const BaseComponent = {
             this.attrs.props.rules = this.attrs.rules.map(rule => {
                 return v => eval(rule);
             });
+        }
+        if (this._.hasIn(this.attrs, 'value')) {
+            this.value = this.attrs.value;
+        }
+
+    },
+    computed: {
+        props() {
+            let _this = this;
+            return this._.mapValues(this.attrs.props, item => {
+                if (typeof (item) === 'string' && this._.endsWith(item, "}") && this._.startsWith(item, "{")) {
+                    let code = _this._.replace(item, '{{', '')
+                    code = _this._.replace(code, '}}', '')
+                    return eval(code)
+                }
+                return item;
+            })
+        },
+        events() {
+            let _this = this;
+            let events = this._.mapValues(this.attrs.events, item => {
+                /**
+                 * 如果是执行代码
+                 * If you're executing code
+                 */
+                if (item.jsCode) {
+
+                    //执行父级事件，需要用 {{ **** }}
+                    if (this._.endsWith(item.jsCode, "}") && this._.startsWith(item.jsCode, "{")) {
+                        let code = _this._.replace(item.jsCode, '{{', '')
+                        code = _this._.replace(code, '}}', '')
+                        return eval(code)
+                    }
+                    //执行自定义事件
+                    return () => {
+                        eval(item.jsCode)
+                    }
+                }
+                /**
+                 * 如果是触发事件
+                 * If it's a triggering event
+                 */
+                if (item.emits && item.emits.length > 0) {
+                    return () => {
+                        item.emits.map(emit => {
+                            this.$bus.emit(emit, this);
+                        })
+                    };
+                }
+            }) || {}
+            return events;
         }
     }
 }

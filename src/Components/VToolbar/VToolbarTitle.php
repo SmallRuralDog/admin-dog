@@ -1,12 +1,14 @@
 <?php
 
+
 namespace SmallRuralDog\AdminDog\Components\VToolbar;
+
 
 use SmallRuralDog\AdminDog\Components\BaseComponent;
 
-class VToolbar extends BaseComponent
+class VToolbarTitle extends BaseComponent
 {
-    protected $componentName = 'VToolbarPro';
+    protected $componentName = 'VToolbarTitlePro';
 
     public static function make()
     {

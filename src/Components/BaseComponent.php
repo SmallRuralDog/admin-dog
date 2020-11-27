@@ -100,6 +100,17 @@ class BaseComponent extends AdminJsonBuilder
     }
 
     /**
+     * 设置组件value属性
+     * @param $value
+     * @return $this
+     */
+    public function value($value)
+    {
+        $this->value = $value;
+        return $this;
+    }
+
+    /**
      * 添加数据事件监听，多次调用可同时监听不同事件
      * Set component listening
      * @param EventListener|Closure $listener

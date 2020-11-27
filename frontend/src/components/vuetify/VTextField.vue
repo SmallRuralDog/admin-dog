@@ -21,12 +21,10 @@
 import {BaseComponent} from "@/components/mixins";
 
 export default {
-    props: ['attrs', 'fields'],
+    props: ['attrs'],
     mixins: [BaseComponent],
     data() {
-        return {
-            value: null
-        }
+        return {}
     },
     mounted() {
 
@@ -50,7 +48,7 @@ export default {
             if (this.$attrs.slotValue) {
                 this.attrs.vModel && this._.set(this.$attrs.slotValue, this.attrs.vModel, e);
             }
-            this.baseChange()
+            this.baseEvent('change')
         }
     }
 }

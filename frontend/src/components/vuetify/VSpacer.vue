@@ -1,5 +1,5 @@
 <template>
-    <v-toolbar v-bind="attrs">
+    <v-spacer v-if="vif" v-bind="attrs.props">
         <template v-for="(slot,name) in attrs.slots" :slot="name">
             <BaseSlot
                 :key="name"
@@ -14,7 +14,7 @@
                 v-bind="$attrs"
             />
         </template>
-    </v-toolbar>
+    </v-spacer>
 </template>
 
 <script>
@@ -22,7 +22,7 @@ import {BaseComponent} from "@/components/mixins";
 
 export default {
     props: ['attrs'],
-    mixins: [BaseComponent],
+    mixins: [BaseComponent]
 }
 </script>
 

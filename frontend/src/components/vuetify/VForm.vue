@@ -40,16 +40,16 @@ export default {
                 //if set action
                 if (this.attrs.action) {
                     this.requesting = true;
-                    this.baseRequesting();
+                    this.baseEvent('requesting');
                     this.$http.post(this.attrs.action, this.fields).then((res) => {
                         this.response = res
-                        this.baseThen();
+                        this.baseEvent('then');
                     }).catch(err => {
                         this.error = err
-                        this.baseCatch();
+                        this.baseEvent('catch');
                     }).finally(() => {
                         this.requesting = true;
-                        this.baseFinally();
+                        this.baseEvent('finally');
                     })
                 }
             }

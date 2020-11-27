@@ -1,12 +1,14 @@
 <?php
 
-namespace SmallRuralDog\AdminDog\Components\VToolbar;
+
+namespace SmallRuralDog\AdminDog\Components\VGrid;
+
 
 use SmallRuralDog\AdminDog\Components\BaseComponent;
 
-class VToolbar extends BaseComponent
+class VSpacer extends BaseComponent
 {
-    protected $componentName = 'VToolbarPro';
+    protected $componentName = 'VSpacerPro';
 
     public static function make()
     {

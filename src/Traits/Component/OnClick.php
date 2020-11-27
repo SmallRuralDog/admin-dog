@@ -22,10 +22,9 @@ trait OnClick
      */
     public function onClick(Closure $closure)
     {
+
         $event = ClickEvent::make();
-
         call_user_func($closure, $event);
-
         $this->events['click'] = $event;
         return $this;
     }

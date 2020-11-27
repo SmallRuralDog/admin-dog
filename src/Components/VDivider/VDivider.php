@@ -1,12 +1,12 @@
 <?php
 
-namespace SmallRuralDog\AdminDog\Components\VToolbar;
+namespace SmallRuralDog\AdminDog\Components\VDivider;
 
 use SmallRuralDog\AdminDog\Components\BaseComponent;
 
-class VToolbar extends BaseComponent
+class VDivider extends BaseComponent
 {
-    protected $componentName = 'VToolbarPro';
+    protected $componentName = 'VDividerPro';
 
     public static function make()
     {
