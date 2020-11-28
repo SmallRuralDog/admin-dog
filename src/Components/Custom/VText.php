@@ -6,7 +6,7 @@ use SmallRuralDog\AdminDog\Components\BaseComponent;
 
 class VText extends BaseComponent
 {
-    protected $componentName = "VTextProx";
+    protected $componentName = "VTextPro";
     protected $text;
 
     /**
