@@ -1,7 +1,7 @@
 <template>
-    <v-icon v-bind="attrs.props" @click="onClick"
-            v-if="attrs.events && attrs.events.click">
-        <template v-for="slot in attrs.slots">
+    <v-icon v-bind="attrs.props"
+            v-if="attrs.events && attrs.events.click" v-on="events">
+        <template v-for="slot in attrs.children">
             {{ slot }}
         </template>
     </v-icon>

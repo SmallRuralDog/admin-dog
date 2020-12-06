@@ -48,7 +48,7 @@ export default {
                         this.error = err
                         this.baseEvent('catch');
                     }).finally(() => {
-                        this.requesting = true;
+                        this.requesting = false;
                         this.baseEvent('finally');
                     })
                 }

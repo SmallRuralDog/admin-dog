@@ -9,6 +9,12 @@ class AdminJsonBuilder implements \JsonSerializable
 
     protected $hideAttrs = [];
 
+
+    public function addHideAttrs($name)
+    {
+        $this->hideAttrs[] = $name;
+    }
+
     public function jsonSerialize()
     {
         $data = null;
